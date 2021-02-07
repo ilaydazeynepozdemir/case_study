@@ -3,16 +3,17 @@ package com.bilyoner.assignment.couponcore;
 import com.bilyoner.assignment.couponapi.model.EventDTO;
 import com.bilyoner.assignment.couponapi.model.enums.EventTypeEnum;
 import com.bilyoner.assignment.couponapi.service.EventService;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import java.time.LocalDateTime;
 
+@RequiredArgsConstructor
 @Component
+@Slf4j
 public class DefaultDataGenerator {
-    DefaultDataGenerator(EventService eventService) {
-        this.eventService = eventService;
-    }
 
     private final EventService eventService;
 
@@ -25,6 +26,7 @@ public class DefaultDataGenerator {
                     .type(defaultEvent.getEventType())
                     .eventDate(LocalDateTime.now())
                     .build());
+            log.info("Created event: {}", defaultEvent.name());
         }
     }
 
@@ -48,7 +50,8 @@ public class DefaultDataGenerator {
 
         BASKETBALL_MBS3_1(3, EventTypeEnum.BASKETBALL),
 
-        TENNIS_MBS1_1(1, EventTypeEnum.TENNIS), TENNIS_MBS1_2(1, EventTypeEnum.TENNIS);
+        TENNIS_MBS1_1(1, EventTypeEnum.TENNIS),
+        TENNIS_MBS1_2(1, EventTypeEnum.TENNIS);
 
         int mbs;
         EventTypeEnum eventType;

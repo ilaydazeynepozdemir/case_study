@@ -2,17 +2,13 @@ package com.bilyoner.assignment.couponcore.service;
 
 import com.bilyoner.assignment.couponapi.entity.CouponEntity;
 import com.bilyoner.assignment.couponapi.entity.EventEntity;
-import com.bilyoner.assignment.couponapi.exception.CustomException;
-import com.bilyoner.assignment.couponapi.exception.ErrorCodeEnum;
 import com.bilyoner.assignment.couponapi.model.CouponCreateRequest;
 import com.bilyoner.assignment.couponapi.model.CouponDTO;
 import com.bilyoner.assignment.couponapi.model.CouponPlayRequest;
-import com.bilyoner.assignment.couponapi.model.EventDTO;
 import com.bilyoner.assignment.couponapi.model.enums.CouponStatusEnum;
 import com.bilyoner.assignment.couponapi.repository.CouponRepository;
 import com.bilyoner.assignment.couponapi.repository.EventRepository;
 import com.bilyoner.assignment.couponapi.service.CouponService;
-import com.bilyoner.assignment.couponapi.service.EventService;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 import lombok.RequiredArgsConstructor;
@@ -28,12 +24,7 @@ import java.util.List;
 @Slf4j
 public class CouponServiceImpl implements CouponService {
 
-    private final static BigDecimal COUPON_COST = new BigDecimal(5);
-
-    CouponServiceImpl(EventRepository eventRepository, CouponRepository couponRepository) {
-        this.couponRepository = couponRepository;
-        this.eventRepository = eventRepository;
-    }
+    private static final BigDecimal COUPON_COST = new BigDecimal(5);
 
     private final CouponRepository couponRepository;
     private final EventRepository eventRepository;
