@@ -7,12 +7,14 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
+import com.google.common.collect.Lists;
 import lombok.Builder;
 import lombok.Getter;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Builder
@@ -43,5 +45,11 @@ public class EventDTO implements Serializable {
                 .type(eventEntity.getType())
                 .eventDate(eventEntity.getEventDate())
                 .build();
+    }
+
+    public static List<EventDTO> mapEntityListToDtoList(List<EventEntity> eventEntities) {
+        List<EventDTO> eventDtoList = Lists.newArrayList();
+        eventEntities.forEach(eventEntity -> eventDtoList.add(mapToEventDTO(eventEntity)));
+        return eventDtoList;
     }
 }

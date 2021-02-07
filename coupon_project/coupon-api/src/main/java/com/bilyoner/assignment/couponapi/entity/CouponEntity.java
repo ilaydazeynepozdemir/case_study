@@ -6,6 +6,8 @@ import lombok.*;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Builder
 @Setter
@@ -19,6 +21,7 @@ public class CouponEntity {
     @GeneratedValue
     private Long id;
 
+    @Column(nullable = false)
     private Long userId;
 
     @Enumerated(EnumType.STRING)
@@ -36,4 +39,8 @@ public class CouponEntity {
 
     @Column(columnDefinition = "TIMESTAMP")
     private LocalDateTime updateDate;
+
+    @ManyToMany(targetEntity = EventEntity.class, fetch = FetchType.LAZY)
+    @JoinColumn(name = "id")
+    private List<EventEntity> events = new ArrayList<>();
 }

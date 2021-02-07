@@ -27,6 +27,8 @@
         <spring-cloud.version>Hoxton.SR8</spring-cloud.version>
         <swagger.version>2.9.2</swagger.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <os-maven-plugin.version>1.6.0</os-maven-plugin.version>
+        <protobuf-maven-plugin.version>0.6.1</protobuf-maven-plugin.version>
     </properties>
 
     <dependencies>
