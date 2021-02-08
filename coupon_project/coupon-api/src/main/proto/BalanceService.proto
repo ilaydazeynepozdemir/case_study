@@ -1,23 +1,20 @@
 syntax = "proto3";
 
 option java_multiple_files = true;
-package com.bilyoner.assignment.balanceapi;
-
-message BInteger {
-    bytes value = 1;
-}
+package com.bilyoner.assignment.balance.api;
 
 message BDecimal {
-    int32 scale = 1;
-    BInteger int_val = 2;
+    uint32 scale = 1;
+    uint32 precision = 2;
+    bytes value = 3;
 }
 
 message BalanceUpdateRequest {
     enum TransactionType {
-        SUCCESSFUL = 0;
-        FAIL = 1;
+        BLOCKED = 0;
+        UPDATED = 1;
     }
-    string userId = 1;
+    int64 userId = 1;
     BDecimal amount = 2;
     string transactionId = 3;
     TransactionType transactionType = 4;
@@ -31,6 +28,16 @@ message BalanceUpdateResponse {
     BalanceUpdateResult result = 1;
 }
 
+message BalanceRequest {
+    int64 userId = 1;
+}
+
+message BalanceResponse {
+    int64 userId = 1;
+    BDecimal amount = 2;
+}
+
 service BalanceService {
-    rpc balanceUpdate (BalanceUpdateRequest) returns (BalanceUpdateResponse);
+    rpc updateUserBalance (BalanceUpdateRequest) returns (BalanceUpdateResponse);
+    rpc getUserBalance (BalanceRequest) returns (BalanceResponse);
 }

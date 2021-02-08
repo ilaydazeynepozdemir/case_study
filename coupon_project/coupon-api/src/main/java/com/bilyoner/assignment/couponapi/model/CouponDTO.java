@@ -6,16 +6,17 @@ import com.bilyoner.assignment.couponapi.model.enums.CouponStatusEnum;
 import com.google.common.collect.Lists;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 @Getter
 @Builder
+@Slf4j
 public class CouponDTO implements Serializable {
 
     private Long id;
@@ -37,6 +38,10 @@ public class CouponDTO implements Serializable {
     }
 
     public static List<CouponDTO> mapEntityListToDto(List<CouponEntity> entityList) {
+        if (entityList == null) {
+            log.warn("Entity list is null.");
+            return Lists.newArrayList();
+        }
         List<CouponDTO> couponDtoList = Lists.newArrayList();
         entityList.forEach(couponEntity -> couponDtoList
                 .add(mapEntityToDto(couponEntity)));

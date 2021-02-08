@@ -17,7 +17,7 @@ public class BalanceController {
 
     private final BalanceService balanceService;
 
-    @PutMapping
+    @PutMapping("updateBalance")
     public void updateBalance(@Valid @RequestBody UpdateBalanceRequest updateBalanceRequest) {
         balanceService.updateBalance(updateBalanceRequest);
     }
